@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <time.h>
+#include <sys/time.h>
 
 #ifdef ELOG_FILE_ENABLE
 #include <elog_file.h>
@@ -82,7 +82,7 @@ void elog_port_output(const char *log, size_t size) {
 #ifdef ELOG_FILE_ENABLE
     /* write the file */
     elog_file_write(log, size);
-#endif 
+#endif
 }
 
 /**
@@ -107,15 +107,17 @@ void elog_port_output_unlock(void) {
  */
 const char *elog_port_get_time(void) {
     static char cur_system_time[24] = { 0 };
+    int len;
 
-    time_t cur_t;
+    struct timeval tv;
     struct tm cur_tm;
+    gettimeofday(&tv, NULL);
+    localtime_r(&tv.tv_sec, &cur_tm);
+    len = strftime(cur_system_time, sizeof(cur_system_time), "%m-%d %T", &cur_tm);
 
-    time(&cur_t);
-    localtime_r(&cur_t, &cur_tm);
-
-    strftime(cur_system_time, sizeof(cur_system_time), "%Y-%m-%d %T", &cur_tm);
-
+    cur_system_time[len] = '-';
+    int msec = tv.tv_usec / 1000;
+    len += sprintf(cur_system_time + len + 1, "%d", msec);
     return cur_system_time;
 }
 

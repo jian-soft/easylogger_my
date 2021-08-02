@@ -211,7 +211,7 @@ void elog_deinit(void) {
     if (!elog.init_ok) {
         return ;
     }
-    
+
 #ifdef ELOG_ASYNC_OUTPUT_ENABLE
     elog_async_deinit();
 #endif
@@ -230,7 +230,7 @@ void elog_start(void) {
     if (!elog.init_ok) {
         return ;
     }
-    
+
     /* enable output */
     elog_set_output_enabled(true);
 
@@ -280,7 +280,7 @@ void elog_set_output_enabled(bool enabled) {
 #ifdef ELOG_COLOR_ENABLE
 /**
  * set log text color enable or disable
- * 
+ *
  * @param enabled TRUE: enable FALSE:disable
  */
 void elog_set_text_color_enabled(bool enabled) {
@@ -363,7 +363,7 @@ void elog_set_filter_kw(const char *keyword) {
 }
 
 /**
- * lock output 
+ * lock output
  */
 void elog_output_lock(void) {
     if (elog.output_lock_enabled) {
@@ -600,10 +600,10 @@ void elog_output(uint8_t level, const char *tag, const char *file, const char *f
     if (get_fmt_enabled(level, ELOG_FMT_TAG)) {
         log_len += elog_strcpy(log_len, log_buf + log_len, tag);
         /* if the tag length is less than 50% ELOG_FILTER_TAG_MAX_LEN, then fill space */
-        if (tag_len <= ELOG_FILTER_TAG_MAX_LEN / 2) {
-            memset(tag_sapce, ' ', ELOG_FILTER_TAG_MAX_LEN / 2 - tag_len);
-            log_len += elog_strcpy(log_len, log_buf + log_len, tag_sapce);
-        }
+        //if (tag_len <= ELOG_FILTER_TAG_MAX_LEN / 2) {
+        //    memset(tag_sapce, ' ', ELOG_FILTER_TAG_MAX_LEN / 2 - tag_len);
+        //    log_len += elog_strcpy(log_len, log_buf + log_len, tag_sapce);
+        //}
         log_len += elog_strcpy(log_len, log_buf + log_len, " ");
     }
     /* package time, process and thread info */
@@ -652,7 +652,7 @@ void elog_output(uint8_t level, const char *tag, const char *file, const char *f
         /* package func info */
         if (get_fmt_enabled(level, ELOG_FMT_FUNC)) {
             log_len += elog_strcpy(log_len, log_buf + log_len, func);
-            
+
         }
         log_len += elog_strcpy(log_len, log_buf + log_len, ")");
     }

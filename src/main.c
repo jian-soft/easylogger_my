@@ -35,7 +35,7 @@
 
 static void test_elog(void);
 
-#define MY_ELOG_FMT (ELOG_FMT_LVL|ELOG_FMT_TAG|ELOG_FMT_TIME|ELOG_FMT_FUNC|ELOG_FMT_LINE|ELOG_FMT_DIR)
+#define MY_ELOG_FMT (ELOG_FMT_LVL|ELOG_FMT_TAG|ELOG_FMT_TIME|ELOG_FMT_FUNC|ELOG_FMT_LINE)
 
 void easylogger_init(void)
 {
@@ -112,6 +112,6 @@ void test_elog(void) {
         log_v("Hello EasyLogger!");
 //        elog_raw("Hello EasyLogger!");
         elog_hexdump("test", 16, buf, sizeof(buf));
-        sleep(5);
+        sleep(2);
     }
 }
