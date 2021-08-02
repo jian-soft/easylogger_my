@@ -117,7 +117,7 @@ const char *elog_port_get_time(void) {
 
     cur_system_time[len] = '-';
     int msec = tv.tv_usec / 1000;
-    len += sprintf(cur_system_time + len + 1, "%d", msec);
+    sprintf(cur_system_time + len + 1, "%d", msec);
     return cur_system_time;
 }
 
