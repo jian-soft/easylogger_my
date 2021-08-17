@@ -33,7 +33,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "elog_file.h"
+#include "../inc/elog_file.h"
 
 /* initialize OK flag */
 static bool init_ok = false;

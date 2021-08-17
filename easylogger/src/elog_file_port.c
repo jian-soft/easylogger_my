@@ -35,8 +35,8 @@
 
 #include <unistd.h>
 
-#include <elog_file.h>
-#include <elog_file_cfg.h>
+#include "../inc/elog_file.h"
+#include "../inc/elog_file_cfg.h"
 
 #define ELOG_FILE_SEM_KEY   ((key_t)0x19910612)
 #ifdef _SEM_SEMUN_UNDEFINED
@@ -73,7 +73,7 @@ ElogErrCode elog_file_port_init(void) {
 /**
  * file log lock
  */
-void inline elog_file_port_lock(void)
+inline void elog_file_port_lock(void)
 {
     semid == -1 ? -1 : semop(semid, (struct sembuf *)&down, 1);
 }
@@ -81,7 +81,7 @@ void inline elog_file_port_lock(void)
 /**
  * file log unlock
  */
-void inline elog_file_port_unlock(void)
+inline void elog_file_port_unlock(void)
 {
     semid == -1 ? -1 : semop(semid, (struct sembuf *)&up, 1);
 }

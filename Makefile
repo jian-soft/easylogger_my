@@ -5,7 +5,7 @@ _CFLAGS := $(CFLAGS)
 _LDFLAGS := $(LDFLAGS) -L. -lpthread
 
 SRC_PATH := src easylogger/src
-INC_PATH := -I./easylogger/inc
+#INC_PATH := -I./easylogger/inc
 
 # path macros
 BIN_PATH := bin
@@ -20,7 +20,7 @@ SRC := $(foreach x, $(SRC_PATH), $(wildcard $(x)/*.c))
 OBJ := ${SRC:%.c=${OBJ_PATH}/%.o}
 
 # clean files list
-DISTCLEAN_LIST := $(OBJ) 
+DISTCLEAN_LIST := $(OBJ)
 CLEAN_LIST := $(TARGET) \
 			  $(DISTCLEAN_LIST)
 
@@ -31,11 +31,11 @@ default: makedir all
 $(TARGET): $(OBJ)
 	@echo "Info: all objs => $@"
 	$(CC) -o $@ $^ $(_LDFLAGS)
-	
+
 $(OBJ_PATH)/%.o:%.c
 	@echo "Info: $^ => $@"
 	@[ -d $(@D) ] || mkdir -p $(@D)
-	$(CC) $(_CFLAGS) $(INC_PATH) -c $< -o $@ 
+	$(CC) $(_CFLAGS) $(INC_PATH) -c $< -o $@
 
 # phony rules
 .PHONY: makedir

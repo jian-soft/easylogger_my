@@ -28,7 +28,7 @@
 
 #define LOG_TAG    "main"
 
-#include <elog.h>
+#include "../easylogger/inc/elog.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

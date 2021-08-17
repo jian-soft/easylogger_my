@@ -28,7 +28,7 @@
 
 #define LOG_TAG      "elog"
 
-#include <elog.h>
+#include "../inc/elog.h"
 #include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -561,9 +561,10 @@ void elog_output(uint8_t level, const char *tag, const char *file, const char *f
     extern const char *elog_port_get_p_info(void);
     extern const char *elog_port_get_t_info(void);
 
-    size_t tag_len = strlen(tag), log_len = 0, newline_len = strlen(ELOG_NEWLINE_SIGN);
+    //size_t tag_len = strlen(tag), log_len = 0, newline_len = strlen(ELOG_NEWLINE_SIGN);
+    size_t log_len = 0, newline_len = strlen(ELOG_NEWLINE_SIGN);
     char line_num[ELOG_LINE_NUM_MAX_LEN + 1] = { 0 };
-    char tag_sapce[ELOG_FILTER_TAG_MAX_LEN / 2 + 1] = { 0 };
+    //char tag_sapce[ELOG_FILTER_TAG_MAX_LEN / 2 + 1] = { 0 };
     va_list args;
     int fmt_result;
 

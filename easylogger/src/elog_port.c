@@ -26,14 +26,14 @@
  * Created on: 2015-04-28
  */
 
-#include <elog.h>
+#include "../inc/elog.h"
 #include <stdio.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <sys/time.h>
 
 #ifdef ELOG_FILE_ENABLE
-#include <elog_file.h>
+#include "../inc/elog_file.h"
 #endif
 static pthread_mutex_t output_lock;
 
@@ -117,7 +117,7 @@ const char *elog_port_get_time(void) {
 
     cur_system_time[len] = '-';
     int msec = tv.tv_usec / 1000;
-    sprintf(cur_system_time + len + 1, "%d", msec);
+    sprintf(cur_system_time + len + 1, "%03d", msec);
     return cur_system_time;
 }
 
