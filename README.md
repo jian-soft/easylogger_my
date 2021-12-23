@@ -14,3 +14,25 @@ make
 ./bin/easyloggerdemo
 ```
 
+## 使用指南
+将easylogger拷到自己项目后，还要修改三个部分。
+1. elog_file_cfg.h： 修改ELOG_FILE_NAME为项目需要保存log的地址
+2. elog_cfg.h： 定义LOG_TAG为自己的TAG，比如#define LOG_TAG "myprogram"
+3. main.c中定义并调用easylogger_init
+```
+#define MY_ELOG_FMT (ELOG_FMT_LVL|ELOG_FMT_TAG|ELOG_FMT_TIME|ELOG_FMT_FUNC|ELOG_FMT_LINE)
+void easylogger_init(void)
+{
+    /* initialize EasyLogger */
+    elog_init();
+    /* set EasyLogger log format */
+    elog_set_fmt(ELOG_LVL_ASSERT, MY_ELOG_FMT);
+    elog_set_fmt(ELOG_LVL_ERROR, MY_ELOG_FMT);
+    elog_set_fmt(ELOG_LVL_WARN, MY_ELOG_FMT);
+    elog_set_fmt(ELOG_LVL_INFO, MY_ELOG_FMT);
+    elog_set_fmt(ELOG_LVL_DEBUG, MY_ELOG_FMT);
+    elog_set_fmt(ELOG_LVL_VERBOSE, MY_ELOG_FMT);
+    elog_start();
+}
+```
+4. 在使用easylogger的地方，#include "elog.h"，然后使用log_i() log_w() log_e()这些接口
